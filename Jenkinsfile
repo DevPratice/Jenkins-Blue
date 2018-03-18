@@ -11,5 +11,13 @@ pipeline {
         sh 'mvn compile'
       }
     }
+    
+    stage('Generate Inventory File') {
+      steps {
+        sh '''cd /var/lib/jenkins/ansible
+              gcloud compute instances list --filter "labels.env:dev" | grep -v ^NAME |awk '{print $1}'
+           '''
+      }
+    }
   }
 }
