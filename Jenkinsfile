@@ -6,5 +6,10 @@ pipeline {
         git(url: 'https://github.com/cit-latex/t1-student-maven-proj.git', branch: 'master')
       }
     }
+    stage('Maven Compile') {
+      steps {
+        sh 'mvn compile'
+      }
+    }
   }
 }
