@@ -11,30 +11,32 @@ pipeline {
         sh 'mvn compile'
       }
     }
-    
     stage('Generate Inventory File') {
       steps {
         sh '''cd /var/lib/jenkins/ansible
-              gcloud compute instances list --filter "labels.env:dev" | grep -v ^NAME |awk '{print $1}' >inventory
+              gcloud compute instances list --filter "labels.env:dev" | grep -v ^NAME |awk \'{print $1}\' >inventory
            '''
       }
     }
     stage('Checking ssh connection') {
-      steps {
-        // Check Ping 
-        //try {
-        sh '''
+      parallel {
+        stage('Checking ssh connection') {
+          steps {
+            sh '''
           cd /var/lib/jenkins/ansible
           ansible -i inventory all -m ping
-        ''' 
-        //} catch('error') {
-        //  println ("Some thng")
-        //  steps {
-        //    sh 'echo Hello'
-        //  }
-        //}
-      }  
-
+        '''
+          }
+        }
+        stage('') {
+          steps {
+            catchError() {
+              sh 'uptime'
+            }
+            
+          }
+        }
+      }
     }
   }
 }
