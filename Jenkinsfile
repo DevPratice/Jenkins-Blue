@@ -19,5 +19,12 @@ pipeline {
            '''
       }
     }
+    stage('Checking ssh connection') {
+      steps {
+        // Check Ping 
+        sh 'ansible -i inventory all -m ping'
+      }
+
+    }
   }
 }
