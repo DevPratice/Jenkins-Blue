@@ -21,17 +21,17 @@ pipeline {
     }
     stage('Checking ssh connection') {
         // Check Ping 
-        try {
+        //try {
         sh '''
           cd /var/lib/jenkins/ansible
           ansible -i inventory all -m ping
         ''' 
-        } catch('error') {
-          println ("Some thng")
-          steps {
-            sh 'echo Hello'
-          }
-        }
+        //} catch('error') {
+        //  println ("Some thng")
+        //  steps {
+        //    sh 'echo Hello'
+        //  }
+        //}
       
 
     }
