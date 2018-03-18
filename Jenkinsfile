@@ -20,6 +20,7 @@ pipeline {
       }
     }
     stage('Checking ssh connection') {
+      steps {
         // Check Ping 
         //try {
         sh '''
@@ -32,7 +33,7 @@ pipeline {
         //    sh 'echo Hello'
         //  }
         //}
-      
+      }  
 
     }
   }
