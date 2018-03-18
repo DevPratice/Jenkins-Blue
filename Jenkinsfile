@@ -20,7 +20,6 @@ pipeline {
       }
     }
     stage('Checking ssh connection') {
-      steps {
         // Check Ping 
         try {
         sh '''
@@ -29,8 +28,11 @@ pipeline {
         ''' 
         } catch('Name or service not known') {
           println ("Some thng")
+          steps {
+            sh 'echo Hello'
+          }
         }
-      }
+      
 
     }
   }
