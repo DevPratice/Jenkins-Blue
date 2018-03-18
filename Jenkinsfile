@@ -26,7 +26,7 @@ pipeline {
           cd /var/lib/jenkins/ansible
           ansible -i inventory all -m ping
         ''' 
-        } catch('Name or service not known') {
+        } catch('error') {
           println ("Some thng")
           steps {
             sh 'echo Hello'
