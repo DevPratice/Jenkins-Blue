@@ -31,7 +31,13 @@ pipeline {
         stage('') {
           steps {
             catchError() {
-              sh 'uptime'
+              sh '''
+              cd /var/lib/jenkins/ansible
+              for server in `cat inventory` ; do 
+                gcloud compute instances start $server
+              done 
+              sleep 10
+              '''
             }
             
           }
