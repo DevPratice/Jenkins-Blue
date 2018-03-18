@@ -22,7 +22,10 @@ pipeline {
     stage('Checking ssh connection') {
       steps {
         // Check Ping 
-        sh 'ansible -i inventory all -m ping'
+        sh '''
+          cd /var/lib/jenkins/ansible
+          ansible -i inventory all -m ping
+        '''
       }
 
     }
