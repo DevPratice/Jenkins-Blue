@@ -22,10 +22,14 @@ pipeline {
     stage('Checking ssh connection') {
       steps {
         // Check Ping 
+        try {
         sh '''
           cd /var/lib/jenkins/ansible
           ansible -i inventory all -m ping
-        '''
+        ''' 
+        } catch('Name or service not known') {
+          println ("Some thng")
+        }
       }
 
     }
